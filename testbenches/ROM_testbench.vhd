@@ -26,11 +26,11 @@
 -- simulation model.
 --------------------------------------------------------------------------------
 LIBRARY ieee;
-USE ieee.std_logic_1164.ALL;
+USE ieee.std_logic_1164.all;
  
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
---USE ieee.numeric_std.ALL;
+--USE ieee.numeric_std.all;
  
 ENTITY ROM_Testbench IS
 END ROM_Testbench;
@@ -41,26 +41,26 @@ ARCHITECTURE behavior OF ROM_Testbench IS
  
     COMPONENT ROM
     PORT(
-         DIRECCION : IN  std_logic_vector(31 downto 0);
-         DATO : OUT  std_logic_vector(31 downto 0)
+         direccion : in  std_logic_vector(31 downto 0);
+         dato : out  std_logic_vector(31 downto 0)
         );
     END COMPONENT;
     
 
-   --Inputs
-   signal DIRECCION : std_logic_vector(31 downto 0) := (others => '0');
+   --inputs
+   signal direccion : std_logic_vector(31 downto 0) := (others => '0');
 
- 	--Outputs
-   signal DATO : std_logic_vector(31 downto 0);
+ 	--outputs
+   signal dato : std_logic_vector(31 downto 0);
    -- No clocks detected in port list. Replace <clock> below with 
    -- appropriate port name 
  
-BEGIN
+BEGin
  
-	-- Instantiate the Unit Under Test (UUT)
+	-- instantiate the Unit Under Test (UUT)
    uut: ROM PORT MAP (
-          DIRECCION => DIRECCION,
-          DATO => DATO
+          direccion => direccion,
+          dato => dato
         );
 
    -- Stimulus process
@@ -71,27 +71,27 @@ BEGIN
 
       -- insert stimulus here 
 		
-		DIRECCION <= x"0000_0000";
+		direccion <= x"0000_0000";
 		
 		wait for 30 ns;
 		
-		DIRECCION <= x"0000_0004";
+		direccion <= x"0000_0004";
 		
 		wait for 30 ns;
 		
-		DIRECCION <= x"0000_0008";
+		direccion <= x"0000_0008";
 		
 		wait for 30 ns;
 		
-		DIRECCION <= x"0000_000C";
+		direccion <= x"0000_000C";
 		
 		wait for 30 ns;
 		
-		DIRECCION <= x"0000_0010";
+		direccion <= x"0000_0010";
 		
 		wait for 30 ns;
 		
-		DIRECCION <= x"0000_0014";
+		direccion <= x"0000_0014";
 		
 		wait for 30 ns;
 		

@@ -1,10 +1,10 @@
 
 LIBRARY ieee;
-USE ieee.std_logic_1164.ALL;
+USE ieee.std_logic_1164.all;
  
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
---USE ieee.numeric_std.ALL;
+--USE ieee.numeric_std.all;
  
 ENTITY RAM_TestBench IS
 END RAM_TestBench;
@@ -15,42 +15,42 @@ ARCHITECTURE behavior OF RAM_TestBench IS
  
     COMPONENT RAM
     PORT(
-         READ_ENABLE : IN  std_logic;
-         WRITE_ENABLE : IN  std_logic;
-         ENABLE : IN  std_logic;
-         CLK : IN  std_logic;
-         ADDRESS : IN  std_logic_vector(31 downto 0);
-         WRITE_DATA : IN  std_logic_vector(31 downto 0);
-         READ_DATA : OUT  std_logic_vector(31 downto 0)
+         read_enable : in  std_logic;
+         write_enable : in  std_logic;
+         enable : in  std_logic;
+         CLK : in  std_logic;
+         address : in  std_logic_vector(31 downto 0);
+         write_data : in  std_logic_vector(31 downto 0);
+         read_data : out  std_logic_vector(31 downto 0)
         );
     END COMPONENT;
     
 
-   --Inputs
-   signal READ_ENABLE : std_logic := '0';
-   signal WRITE_ENABLE : std_logic := '0';
-   signal ENABLE : std_logic := '0';
+   --inputs
+   signal read_enable : std_logic := '0';
+   signal write_enable : std_logic := '0';
+   signal enable : std_logic := '0';
    signal CLK : std_logic := '0';
-   signal ADDRESS : std_logic_vector(31 downto 0) := (others => '0');
-   signal WRITE_DATA : std_logic_vector(31 downto 0) := (others => '0');
+   signal address : std_logic_vector(31 downto 0) := (others => '0');
+   signal write_data : std_logic_vector(31 downto 0) := (others => '0');
 
- 	--Outputs
-   signal READ_DATA : std_logic_vector(31 downto 0);
+ 	--outputs
+   signal read_data : std_logic_vector(31 downto 0);
 
    -- Clock period definitions
    constant CLK_period : time := 10 ns;
  
-BEGIN
+BEGin
  
-	-- Instantiate the Unit Under Test (UUT)
+	-- instantiate the Unit Under Test (UUT)
    uut: RAM PORT MAP (
-          READ_ENABLE => READ_ENABLE,
-          WRITE_ENABLE => WRITE_ENABLE,
-          ENABLE => ENABLE,
+          read_enable => read_enable,
+          write_enable => write_enable,
+          enable => enable,
           CLK => CLK,
-          ADDRESS => ADDRESS,
-          WRITE_DATA => WRITE_DATA,
-          READ_DATA => READ_DATA
+          address => address,
+          write_data => write_data,
+          read_data => read_data
         );
 
    -- Clock process definitions
@@ -73,27 +73,27 @@ BEGIN
 
       -- insert stimulus here 
 		
-		READ_ENABLE <= '1';
-		WRITE_ENABLE <= '0';
-		ENABLE <= '0';
-		ADDRESS <= x"0000_0000";
-		WRITE_DATA <= x"0000_0000";
+		read_enable <= '1';
+		write_enable <= '0';
+		enable <= '0';
+		address <= x"0000_0000";
+		write_data <= x"0000_0000";
 		
 		wait for 100 ns;
 		
-		ADDRESS <= x"0000_0004";
+		address <= x"0000_0004";
 		
 		wait for 100 ns;
 		
-		READ_ENABLE <= '0';
-		WRITE_ENABLE <= '1';
-		WRITE_DATA <= x"0000_1111";
+		read_enable <= '0';
+		write_enable <= '1';
+		write_data <= x"0000_1111";
 		
 		wait for 100 ns;
 		
-		WRITE_ENABLE <= '0';
-		READ_ENABLE <= '1';
-		WRITE_DATA <= x"0000_0000";
+		write_enable <= '0';
+		read_enable <= '1';
+		write_data <= x"0000_0000";
 
       wait;
    end process;

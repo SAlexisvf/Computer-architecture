@@ -1,14 +1,14 @@
 
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.NUMERIC_STD.all;
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 
 entity alu is
-  PORT (a : IN std_logic_vector(31 DOWNTO 0);
-        b : IN std_logic_vector(31 DOWNTO 0);
-		  cntrl : IN std_logic_vector(2 DOWNTO 0);
-		  zero : OUT std_logic;
-        result : BUFFER std_logic_vector(31 DOWNTO 0));
+  PORT (a : in std_logic_vector(31 downto 0);
+        b : in std_logic_vector(31 downto 0);
+		  cntrl : in std_logic_vector(2 downto 0);
+		  zero : out std_logic;
+        result : buffer std_logic_vector(31 downto 0));
 end alu;
 --- usar result temporal en vez del buffer pq luego no va  ajalar en el spartan puto
 architecture Behavioral of alu is
@@ -30,7 +30,7 @@ begin
 			result <= a;
 		when "100" =>
 		-- B UPPER
-			result <= b(15 DOWNTO 0) & x"0000";
+			result <= b(15 downto 0) & x"0000";
 		when "110" => null;
 		-- SUBSTRACT
 			result <= std_logic_vector(UNSIGNED(a) - UNSIGNED(b));

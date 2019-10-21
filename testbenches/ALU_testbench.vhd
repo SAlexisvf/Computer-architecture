@@ -26,11 +26,11 @@
 -- simulation model.
 --------------------------------------------------------------------------------
 LIBRARY ieee;
-USE ieee.std_logic_1164.ALL;
+USE ieee.std_logic_1164.all;
  
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
---USE ieee.numeric_std.ALL;
+--USE ieee.numeric_std.all;
  
 ENTITY alu_testbench IS
 END alu_testbench;
@@ -41,29 +41,29 @@ ARCHITECTURE behavior OF alu_testbench IS
  
     COMPONENT alu
     PORT(
-         a : IN  std_logic_vector(31 downto 0);
-         b : IN  std_logic_vector(31 downto 0);
-         cntrl : IN  std_logic_vector(2 downto 0);
-         zero : OUT  std_logic;
+         a : in  std_logic_vector(31 downto 0);
+         b : in  std_logic_vector(31 downto 0);
+         cntrl : in  std_logic_vector(2 downto 0);
+         zero : out  std_logic;
          result : BUFFER  std_logic_vector(31 downto 0)
         );
     END COMPONENT;
     
 
-   --Inputs
+   --inputs
    signal a : std_logic_vector(31 downto 0) := (others => '0');
    signal b : std_logic_vector(31 downto 0) := (others => '0');
    signal cntrl : std_logic_vector(2 downto 0) := (others => '0');
 
- 	--Outputs
+ 	--outputs
    signal zero : std_logic;
    signal result : std_logic_vector(31 downto 0);
    -- No clocks detected in port list. Replace <clock> below with 
    -- appropriate port name 
  
-BEGIN
+BEGin
  
-	-- Instantiate the Unit Under Test (UUT)
+	-- instantiate the Unit Under Test (UUT)
    uut: alu PORT MAP (
           a => a,
           b => b,
