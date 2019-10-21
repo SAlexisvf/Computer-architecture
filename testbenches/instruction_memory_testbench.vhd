@@ -32,14 +32,14 @@ USE ieee.std_logic_1164.all;
 -- arithmetic functions with Signed or Unsigned values
 --USE ieee.numeric_std.all;
  
-ENTITY ROM_Testbench IS
-END ROM_Testbench;
+ENTITY instruction_memory_testbench IS
+END instruction_memory_testbench;
  
-ARCHITECTURE behavior OF ROM_Testbench IS 
+ARCHITECTURE behavior OF instruction_memory_testbench IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
  
-    COMPONENT ROM
+    COMPONENT instruction_memory
     PORT(
          direccion : in  std_logic_vector(31 downto 0);
          dato : out  std_logic_vector(31 downto 0)
@@ -58,7 +58,7 @@ ARCHITECTURE behavior OF ROM_Testbench IS
 BEGin
  
 	-- instantiate the Unit Under Test (UUT)
-   uut: ROM PORT MAP (
+   uut: instruction_memory PORT MAP (
           direccion => direccion,
           dato => dato
         );

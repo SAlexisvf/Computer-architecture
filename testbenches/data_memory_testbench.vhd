@@ -6,14 +6,14 @@ USE ieee.std_logic_1164.all;
 -- arithmetic functions with Signed or Unsigned values
 --USE ieee.numeric_std.all;
  
-ENTITY RAM_TestBench IS
-END RAM_TestBench;
+ENTITY data_memory_testbench IS
+END data_memory_testbench;
  
-ARCHITECTURE behavior OF RAM_TestBench IS 
+ARCHITECTURE behavior OF data_memory_testbench IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
  
-    COMPONENT RAM
+    COMPONENT data_memory
     PORT(
          read_enable : in  std_logic;
          write_enable : in  std_logic;
@@ -43,7 +43,7 @@ ARCHITECTURE behavior OF RAM_TestBench IS
 BEGin
  
 	-- instantiate the Unit Under Test (UUT)
-   uut: RAM PORT MAP (
+   uut: data_memory PORT MAP (
           read_enable => read_enable,
           write_enable => write_enable,
           enable => enable,
