@@ -11,3 +11,4 @@ isim/
 *.gise
 *.xise
 *.ini
+*.DS_Store
