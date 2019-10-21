@@ -1,13 +1,13 @@
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-USE ieee.numeric_std.ALL;
-USE work.SLV.ALL;
+library ieee;
+use ieee.STD_LOGIC_1164.all;
+USE ieee.numeric_std.all;
+USE work.SLV.all;
 
 entity reg is
-  PORT (clk : IN std_logic;
-		  WriteData : IN std_logic_vector(31 DOWNTO 0);
-        Enabler : IN std_logic_vector(31 DOWNTO 0);
-		  Registers : OUT SLV_ARRAY);
+  port (clk : in std_logic;
+		  WriteData : in std_logic_vector(31 downto 0);
+        Enabler : in std_logic_vector(31 downto 0);
+		  Registers : out SLV_ARRAY);
 end reg;
 
 architecture Behavioral of reg is

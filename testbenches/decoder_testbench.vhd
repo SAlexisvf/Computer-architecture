@@ -26,41 +26,41 @@
 -- simulation model.
 --------------------------------------------------------------------------------
 LIBRARY ieee;
-USE ieee.std_logic_1164.ALL;
+USE ieee.std_logic_1164.all;
  
 -- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---USE ieee.numeric_std.ALL;
+-- arithmetic functions with Signed or unsigned values
+--USE ieee.numeric_std.all;
  
 ENTITY decoder_testbench IS
-END decoder_testbench;
+end decoder_testbench;
  
 ARCHITECTURE behavior OF decoder_testbench IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
  
     COMPONENT decoder
-    PORT(
-         WriteReg : IN  std_logic_vector(4 downto 0);
-         RegWrite : IN  std_logic;
-         Enabler : OUT  std_logic_vector(31 downto 0)
+    port(
+         WriteReg : in  std_logic_vector(4 downto 0);
+         RegWrite : in  std_logic;
+         Enabler : out  std_logic_vector(31 downto 0)
         );
-    END COMPONENT;
+    end COMPONENT;
     
 
-   --Inputs
+   --inputs
    signal WriteReg : std_logic_vector(4 downto 0) := (others => '0');
    signal RegWrite : std_logic := '0';
 
- 	--Outputs
+ 	--outputs
    signal Enabler : std_logic_vector(31 downto 0);
    -- No clocks detected in port list. Replace <clock> below with 
    -- appropriate port name 
  
-BEGIN
+begin
  
-	-- Instantiate the Unit Under Test (UUT)
-   uut: decoder PORT MAP (
+	-- instantiate the Unit Under Test (UUT)
+   uut: decoder port map (
           WriteReg => WriteReg,
           RegWrite => RegWrite,
           Enabler => Enabler
@@ -94,4 +94,4 @@ BEGIN
       wait;
    end process;
 
-END;
+end;

@@ -26,45 +26,45 @@
 -- simulation model.
 --------------------------------------------------------------------------------
 LIBRARY ieee;
-USE ieee.std_logic_1164.ALL;
-USE work.SLV.ALL;
+USE ieee.std_logic_1164.all;
+USE work.SLV.all;
  
 -- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---USE ieee.numeric_std.ALL;
+-- arithmetic functions with Signed or unsigned values
+--USE ieee.numeric_std.all;
  
 ENTITY registers_testbench IS
-END registers_testbench;
+end registers_testbench;
  
 ARCHITECTURE behavior OF registers_testbench IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
  
     COMPONENT reg
-    PORT(
-         clk : IN  std_logic;
-         WriteData : IN  std_logic_vector(31 downto 0);
-         Enabler : IN  std_logic_vector(31 downto 0);
-         Registers : OUT  SLV_ARRAY
+    port(
+         clk : in  std_logic;
+         WriteData : in  std_logic_vector(31 downto 0);
+         Enabler : in  std_logic_vector(31 downto 0);
+         Registers : out  SLV_ARRAY
         );
-    END COMPONENT;
+    end COMPONENT;
     
 
-   --Inputs
+   --inputs
    signal clk : std_logic := '0';
    signal WriteData : std_logic_vector(31 downto 0) := (others => '0');
    signal Enabler : std_logic_vector(31 downto 0) := (others => '0');
 
- 	--Outputs
+ 	--outputs
    signal Registers : SLV_ARRAY;
 
    -- Clock period definitions
    constant clk_period : time := 10 ns;
  
-BEGIN
+begin
  
-	-- Instantiate the Unit Under Test (UUT)
-   uut: reg PORT MAP (
+	-- instantiate the Unit Under Test (UUT)
+   uut: reg port map (
           clk => clk,
           WriteData => WriteData,
           Enabler => Enabler,
@@ -103,4 +103,4 @@ BEGIN
       wait;
    end process;
 
-END;
+end;

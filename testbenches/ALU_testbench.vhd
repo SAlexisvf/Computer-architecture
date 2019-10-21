@@ -29,25 +29,25 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.all;
  
 -- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
+-- arithmetic functions with Signed or unsigned values
 --USE ieee.numeric_std.all;
  
 ENTITY alu_testbench IS
-END alu_testbench;
+end alu_testbench;
  
 ARCHITECTURE behavior OF alu_testbench IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
  
     COMPONENT alu
-    PORT(
+    port(
          a : in  std_logic_vector(31 downto 0);
          b : in  std_logic_vector(31 downto 0);
          cntrl : in  std_logic_vector(2 downto 0);
          zero : out  std_logic;
          result : BUFFER  std_logic_vector(31 downto 0)
         );
-    END COMPONENT;
+    end COMPONENT;
     
 
    --inputs
@@ -61,10 +61,10 @@ ARCHITECTURE behavior OF alu_testbench IS
    -- No clocks detected in port list. Replace <clock> below with 
    -- appropriate port name 
  
-BEGin
+begin
  
 	-- instantiate the Unit Under Test (UUT)
-   uut: alu PORT MAP (
+   uut: alu port map (
           a => a,
           b => b,
           cntrl => cntrl,
@@ -112,4 +112,4 @@ BEGin
       wait;
    end process;
 
-END;
+end;

@@ -3,18 +3,18 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.all;
  
 -- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
+-- arithmetic functions with Signed or unsigned values
 --USE ieee.numeric_std.all;
  
 ENTITY data_memory_testbench IS
-END data_memory_testbench;
+end data_memory_testbench;
  
 ARCHITECTURE behavior OF data_memory_testbench IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
  
     COMPONENT data_memory
-    PORT(
+    port(
          read_enable : in  std_logic;
          write_enable : in  std_logic;
          enable : in  std_logic;
@@ -23,7 +23,7 @@ ARCHITECTURE behavior OF data_memory_testbench IS
          write_data : in  std_logic_vector(31 downto 0);
          read_data : out  std_logic_vector(31 downto 0)
         );
-    END COMPONENT;
+    end COMPONENT;
     
 
    --inputs
@@ -40,10 +40,10 @@ ARCHITECTURE behavior OF data_memory_testbench IS
    -- Clock period definitions
    constant CLK_period : time := 10 ns;
  
-BEGin
+begin
  
 	-- instantiate the Unit Under Test (UUT)
-   uut: data_memory PORT MAP (
+   uut: data_memory port map (
           read_enable => read_enable,
           write_enable => write_enable,
           enable => enable,
@@ -98,4 +98,4 @@ BEGin
       wait;
    end process;
 
-END;
+end;

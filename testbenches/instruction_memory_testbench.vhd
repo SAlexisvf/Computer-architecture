@@ -29,22 +29,22 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.all;
  
 -- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
+-- arithmetic functions with Signed or unsigned values
 --USE ieee.numeric_std.all;
  
 ENTITY instruction_memory_testbench IS
-END instruction_memory_testbench;
+end instruction_memory_testbench;
  
 ARCHITECTURE behavior OF instruction_memory_testbench IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
  
     COMPONENT instruction_memory
-    PORT(
+    port(
          direccion : in  std_logic_vector(31 downto 0);
          dato : out  std_logic_vector(31 downto 0)
         );
-    END COMPONENT;
+    end COMPONENT;
     
 
    --inputs
@@ -55,10 +55,10 @@ ARCHITECTURE behavior OF instruction_memory_testbench IS
    -- No clocks detected in port list. Replace <clock> below with 
    -- appropriate port name 
  
-BEGin
+begin
  
 	-- instantiate the Unit Under Test (UUT)
-   uut: instruction_memory PORT MAP (
+   uut: instruction_memory port map (
           direccion => direccion,
           dato => dato
         );
@@ -99,4 +99,4 @@ BEGin
       wait;
    end process;
 
-END;
+end;

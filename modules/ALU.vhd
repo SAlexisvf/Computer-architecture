@@ -4,7 +4,7 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity alu is
-  PORT (a : in std_logic_vector(31 downto 0);
+  port (a : in std_logic_vector(31 downto 0);
         b : in std_logic_vector(31 downto 0);
 		  cntrl : in std_logic_vector(2 downto 0);
 		  zero : out std_logic;
@@ -24,7 +24,7 @@ begin
 			result <= A or b;
 		when "010" =>
 		-- ADD
-			result <= std_logic_vector(UNSIGNED(a) + UNSIGNED(b));
+			result <= std_logic_vector(unsigned(a) + unsigned(b));
 		when "011" =>
 		-- MOV
 			result <= a;
@@ -33,7 +33,7 @@ begin
 			result <= b(15 downto 0) & x"0000";
 		when "110" => null;
 		-- SUBSTRACT
-			result <= std_logic_vector(UNSIGNED(a) - UNSIGNED(b));
+			result <= std_logic_vector(unsigned(a) - unsigned(b));
 		when "111" => null;
 		-- SET LESS THAN
 			if a < b then

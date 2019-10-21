@@ -26,33 +26,33 @@
 -- simulation model.
 --------------------------------------------------------------------------------
 LIBRARY ieee;
-USE ieee.std_logic_1164.ALL;
+USE ieee.std_logic_1164.all;
  
 -- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---USE ieee.numeric_std.ALL;
+-- arithmetic functions with Signed or unsigned values
+--USE ieee.numeric_std.all;
  
 ENTITY register_file_testbench IS
-END register_file_testbench;
+end register_file_testbench;
  
 ARCHITECTURE behavior OF register_file_testbench IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
  
     COMPONENT register_file
-    PORT(
-         clk : IN  std_logic;
-         WriteReg : IN  std_logic_vector(4 downto 0);
-         ReadReg1 : IN  std_logic_vector(4 downto 0);
-         ReadReg2 : IN  std_logic_vector(4 downto 0);
-         RegWrite : IN  std_logic;
-         WriteData : IN  std_logic_vector(31 downto 0);
-         ReadReg1Output : OUT  std_logic_vector(31 downto 0);
-         ReadReg2Output : OUT  std_logic_vector(31 downto 0)
+    port(
+         clk : in  std_logic;
+         WriteReg : in  std_logic_vector(4 downto 0);
+         ReadReg1 : in  std_logic_vector(4 downto 0);
+         ReadReg2 : in  std_logic_vector(4 downto 0);
+         RegWrite : in  std_logic;
+         WriteData : in  std_logic_vector(31 downto 0);
+         ReadReg1output : out  std_logic_vector(31 downto 0);
+         ReadReg2output : out  std_logic_vector(31 downto 0)
         );
-    END COMPONENT;
+    end COMPONENT;
 
-   --Inputs
+   --inputs
    signal clk : std_logic := '0';
    signal WriteReg : std_logic_vector(4 downto 0) := (others => '0');
    signal ReadReg1 : std_logic_vector(4 downto 0) := (others => '0');
@@ -60,25 +60,25 @@ ARCHITECTURE behavior OF register_file_testbench IS
    signal RegWrite : std_logic := '0';
    signal WriteData : std_logic_vector(31 downto 0) := (others => '0');
 
- 	--Outputs
-   signal ReadReg1Output : std_logic_vector(31 downto 0);
-   signal ReadReg2Output : std_logic_vector(31 downto 0);
+ 	--outputs
+   signal ReadReg1output : std_logic_vector(31 downto 0);
+   signal ReadReg2output : std_logic_vector(31 downto 0);
 
    -- Clock period definitions
    constant clk_period : time := 10 ns;
  
-BEGIN
+begin
  
-	-- Instantiate the Unit Under Test (UUT)
-   uut: register_file PORT MAP (
+	-- instantiate the Unit Under Test (UUT)
+   uut: register_file port map (
           clk => clk,
           WriteReg => WriteReg,
           ReadReg1 => ReadReg1,
           ReadReg2 => ReadReg2,
           RegWrite => RegWrite,
           WriteData => WriteData,
-          ReadReg1Output => ReadReg1Output,
-          ReadReg2Output => ReadReg2Output
+          ReadReg1output => ReadReg1output,
+          ReadReg2output => ReadReg2output
         );
 
    -- Clock process definitions
@@ -123,4 +123,4 @@ BEGIN
       wait;
    end process;
 
-END;
+end;

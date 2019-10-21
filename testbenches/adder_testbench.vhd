@@ -1,65 +1,35 @@
---------------------------------------------------------------------------------
--- Company: 
--- Engineer:
---
--- Create Date:   17:56:25 08/29/2019
--- Design Name:   
--- Module Name:   C:/Users/salex/Desktop/LabArqui/Practica1/adder_testBench.vhd
--- Project Name:  Practica1
--- Target Device:  
--- Tool versions:  
--- Description:   
--- 
--- VHDL Test Bench Created by ISE for module: adder
--- 
--- Dependencies:
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
---
--- Notes: 
--- This testbench has been automatically generated using types std_logic and
--- std_logic_vector for the ports of the unit under test.  Xilinx recommends
--- that these types always be used for the top-level I/O of a design in order
--- to guarantee that the testbench will bind correctly to the post-implementation 
--- simulation model.
---------------------------------------------------------------------------------
+
 LIBRARY ieee;
-USE ieee.std_logic_1164.ALL;
- 
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---USE ieee.numeric_std.ALL;
+USE ieee.std_logic_1164.all;
  
 ENTITY adder_testBench IS
-END adder_testBench;
+end adder_testBench;
  
 ARCHITECTURE behavior OF adder_testBench IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
  
     COMPONENT adder
-    PORT(
-         a : IN  std_logic_vector(31 downto 0);
-         b : IN  std_logic_vector(31 downto 0);
-         c : OUT  std_logic_vector(31 downto 0)
+    port(
+         a : in  std_logic_vector(31 downto 0);
+         b : in  std_logic_vector(31 downto 0);
+         c : out  std_logic_vector(31 downto 0)
         );
-    END COMPONENT;
+    end COMPONENT;
 
-   --Inputs
+   --inputs
    signal a : std_logic_vector(31 downto 0) := (others => '0');
    signal b : std_logic_vector(31 downto 0) := (others => '0');
 
- 	--Outputs
+ 	--outputs
    signal c : std_logic_vector(31 downto 0);
    -- No clocks detected in port list. Replace <clock> below with 
    -- appropriate port name 
  
-BEGIN
+begin
  
-	-- Instantiate the Unit Under Test (UUT)
-   uut: adder PORT MAP (
+	-- instantiate the Unit Under Test (UUT)
+   uut: adder port map (
           a => a,
           b => b,
           c => c
@@ -93,4 +63,4 @@ BEGIN
       wait;
    end process;
 
-END;
+end;

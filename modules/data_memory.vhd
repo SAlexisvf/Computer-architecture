@@ -5,7 +5,7 @@ library UNISIM;
 use UNISIM.VComponents.all;
 
 entity data_memory is
-	PORT(
+	port(
 		read_enable: in std_logic;
 		write_enable: in std_logic;
 		enable: in std_logic;
@@ -19,7 +19,7 @@ architecture Behavioral of data_memory is
 
 begin
 
-PROCESS(CLK)
+process(CLK)
 
 SUBTYPE REGISTRO IS std_logic_vector(31 downto 0);
 TYPE REG_BANK IS ARRAY(0 TO 31) OF REGISTRO; 
@@ -37,9 +37,9 @@ begin
 if CLK'event AND CLK = '0' THEN
 	if enable = '0' then
 		if read_enable = '1' THEN
-			read_data <= RAM_MEMORY(TO_inTEGER(UNSIGNED(address(6 downto 2))));
+			read_data <= RAM_MEMORY(TO_inTEGER(unsigned(address(6 downto 2))));
 		elsif write_enable = '1' then 
-			RAM_MEMORY(TO_inTEGER(UNSIGNED(address(6 downto 2)))) := write_data;
+			RAM_MEMORY(TO_inTEGER(unsigned(address(6 downto 2)))) := write_data;
 			read_data <= (OTHERS => '0');
 		end if;
 	end if;

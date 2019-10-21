@@ -1,15 +1,15 @@
 -- Code your design here
-library IEEE;
-use IEEE.std_logic_1164.all;
-use IEEE.NUMERIC_STD.all;
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.NUMERIC_STD.all;
 
 ENTITY adder IS
-  PORT (a : IN std_logic_vector(31 DOWNTO 0);
-        b : IN std_logic_vector(31 DOWNTO 0);
-        c : OUT std_logic_vector(31 DOWNTO 0));
-END adder;
+  port (a : in std_logic_vector(31 downto 0);
+        b : in std_logic_vector(31 downto 0);
+        c : out std_logic_vector(31 downto 0));
+end adder;
 
 ARCHITECTURE adder_impl OF adder IS
-BEGIN
-	c <= std_logic_vector(UNSIGNED(a) + UNSIGNED(b));
-END adder_impl;
+begin
+	c <= std_logic_vector(unsigned(a) + unsigned(b));
+end adder_impl;

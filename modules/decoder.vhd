@@ -1,11 +1,11 @@
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.NUMERIC_STD.ALL;
+library ieee;
+use ieee.STD_LOGIC_1164.all;
+use ieee.NUMERIC_STD.all;
 
 entity decoder is
-  PORT (WriteReg : IN std_logic_vector(4 DOWNTO 0);
-        RegWrite : IN std_logic;
-		  Enabler : OUT std_logic_vector(31 DOWNTO 0));
+  port (WriteReg : in std_logic_vector(4 downto 0);
+        RegWrite : in std_logic;
+		  Enabler : out std_logic_vector(31 downto 0));
 end decoder;
 
 architecture Behavioral of decoder is

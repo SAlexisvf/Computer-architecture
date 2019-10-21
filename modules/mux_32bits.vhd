@@ -1,23 +1,23 @@
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
+library ieee;
+use ieee.STD_LOGIC_1164.all;
 
 entity mux32 is 
-	Port (selector: in std_logic; -- selector line
-	input_1: in STD_LOGIC_VECTOR (31 downto 0); -- input 1
-	input_2: in STD_LOGIC_VECTOR (31 downto 0); -- input 2
-	output: out STD_LOGIC_VECTOR (31 downto 0)); -- output
+	port (selector: in std_logic; -- selector line
+	input_1: in std_logic_vector (31 downto 0); -- input 1
+	input_2: in std_logic_vector (31 downto 0); -- input 2
+	output: out std_logic_vector (31 downto 0)); -- output
 end mux32;
 
 architecture mux32_impl of mux32 is
 begin 
-	PROCESS(selector, input_1, input_2)
-	BEGIN
+	process(selector, input_1, input_2)
+	begin
 	if selector = '0' THEN
 		output <= input_1;
-	ELSE
+	else
 		output <= input_2;
-	END IF;
-	END PROCESS;
+	end if;
+	end process;
 end mux32_impl;
 
 

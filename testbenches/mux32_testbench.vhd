@@ -26,43 +26,43 @@
 -- simulation model.
 --------------------------------------------------------------------------------
 LIBRARY ieee;
-USE ieee.std_logic_1164.ALL;
+USE ieee.std_logic_1164.all;
  
 -- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---USE ieee.numeric_std.ALL;
+-- arithmetic functions with Signed or unsigned values
+--USE ieee.numeric_std.all;
  
 ENTITY mux32_testBench IS
-END mux32_testBench;
+end mux32_testBench;
  
 ARCHITECTURE behavior OF mux32_testBench IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
  
     COMPONENT mux32
-    PORT(
-         selector : IN  std_logic;
-         input_1 : IN  std_logic_vector(31 downto 0);
-         input_2 : IN  std_logic_vector(31 downto 0);
-         output : OUT  std_logic_vector(31 downto 0)
+    port(
+         selector : in  std_logic;
+         input_1 : in  std_logic_vector(31 downto 0);
+         input_2 : in  std_logic_vector(31 downto 0);
+         output : out  std_logic_vector(31 downto 0)
         );
-    END COMPONENT;
+    end COMPONENT;
     
 
-   --Inputs
+   --inputs
    signal selector : std_logic := '0';
    signal input_1 : std_logic_vector(31 downto 0) := (others => '0');
    signal input_2 : std_logic_vector(31 downto 0) := (others => '0');
 
- 	--Outputs
+ 	--outputs
    signal output : std_logic_vector(31 downto 0);
    -- No clocks detected in port list. Replace <clock> below with 
    -- appropriate port name 
  
-BEGIN
+begin
  
-	-- Instantiate the Unit Under Test (UUT)
-   uut: mux32 PORT MAP (
+	-- instantiate the Unit Under Test (UUT)
+   uut: mux32 port map (
           selector => selector,
           input_1 => input_1,
           input_2 => input_2,
@@ -100,4 +100,4 @@ BEGIN
       wait;
    end process;
 
-END;
+end;

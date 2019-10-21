@@ -5,7 +5,7 @@ library UNISIM;
 use UNISIM.VComponents.all;
 
 entity instruction_memory is
-	PORT(
+	port(
 		direccion : in std_logic_vector(31 downto 0);
 		dato : out std_logic_vector(31 downto 0)
 	);
@@ -14,7 +14,7 @@ end instruction_memory;
 architecture Behavioral of instruction_memory is
 begin
 
-PROCESS(direccion)
+process(direccion)
 
 SUBTYPE REGISTRO IS std_logic_vector(31 downto 0);
 TYPE REG_BANK IS ARRAY(0 TO 31) OF REGISTRO; 
@@ -28,9 +28,9 @@ VARIABLE ROM_MEMORY : REG_BANK := (
 OTHERS => (OTHERS => '0') 
 );
 
-BEGin
-	dato <= ROM_MEMORY(TO_inTEGER(UNSIGNED(direccion(6 downto 2))));
-END PROCESS;
+begin
+	dato <= ROM_MEMORY(TO_inTEGER(unsigned(direccion(6 downto 2))));
+end process;
 
 end Behavioral;
 
