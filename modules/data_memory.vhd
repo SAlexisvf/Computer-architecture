@@ -12,7 +12,8 @@ entity data_memory is
 		CLK: in std_logic;
 		address: in std_logic_vector(31 downto 0);
 		write_data: in std_logic_vector(31 downto 0);
-		read_data: out std_logic_vector(31 downto 0));
+		read_data: out std_logic_vector(31 downto 0)
+	);
 end data_memory;
 
 architecture Behavioral of data_memory is

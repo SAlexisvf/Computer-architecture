@@ -4,11 +4,13 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity alu is
-  port (a : in std_logic_vector(31 downto 0);
+	port (
+		a : in std_logic_vector(31 downto 0);
         b : in std_logic_vector(31 downto 0);
-		  cntrl : in std_logic_vector(2 downto 0);
-		  zero : out std_logic;
-        result : buffer std_logic_vector(31 downto 0));
+		cntrl : in std_logic_vector(2 downto 0);
+		zero : out std_logic;
+		result : buffer std_logic_vector(31 downto 0)
+	);
 end alu;
 --- usar result temporal en vez del buffer pq luego no va  ajalar en el spartan puto
 architecture Behavioral of alu is

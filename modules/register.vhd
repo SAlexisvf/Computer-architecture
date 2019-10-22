@@ -4,10 +4,12 @@ USE ieee.numeric_std.all;
 USE work.SLV.all;
 
 entity reg is
-  port (clk : in std_logic;
-		  WriteData : in std_logic_vector(31 downto 0);
+	port (
+		clk : in std_logic;
+		WriteData : in std_logic_vector(31 downto 0);
         Enabler : in std_logic_vector(31 downto 0);
-		  Registers : out SLV_ARRAY);
+		Registers : out SLV_ARRAY
+	);
 end reg;
 
 architecture Behavioral of reg is
