@@ -29,7 +29,7 @@ OTHERS => (OTHERS => '0')
 );
 
 begin
-	dato <= ROM_MEMORY(TO_inTEGER(unsigned(direccion(6 downto 2))));
+	dato <= ROM_MEMORY(to_integer(unsigned(direccion(6 downto 2))));
 end process;
 
 end Behavioral;

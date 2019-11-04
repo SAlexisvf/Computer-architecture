@@ -122,18 +122,18 @@ architecture Behavioral of MIPS_processor is
         );
     end component;
 
-    signal instruction_address: std_logic_vector(31 downto 0); -- Address of the instruction to run
-	signal next_address: std_logic_vector(31 downto 0); -- Next address to be loaded into PC
-	signal instruction: std_logic_vector(31 downto 0); -- The actual instruction to run
+    signal instruction_address: std_logic_vector(31 downto 0);
+    signal next_address: std_logic_vector(31 downto 0);
+    signal instruction: std_logic_vector(31 downto 0);
     signal read_data_1, read_data_2, write_data, next_pc, extended_immediate, shifted_immediate, add_pc_immediate: std_logic_vector(31 downto 0);
     signal mux_registers_out, alu_result, mux_add_1_res, mux_add_2_res, mem_read_data: std_logic_vector(31 downto 0);
-	signal shifted_jump_address: std_logic_vector(27 downto 0);
-	signal jump_address: std_logic_vector(25 downto 0);
-	signal immediate: std_logic_vector(15 downto 0);
-	signal opcode, funct: std_logic_vector(5 downto 0);
-	signal rs, rt, rd, write_reg, mux_registers: std_logic_vector(4 downto 0);
-	signal alu_ctrl: std_logic_vector(3 downto 0);
-	signal reg_dest, jump, branch, mem_read, mem_to_reg, mem_write, alu_src, reg_write, alu_zero, branch_and_alu_zero, JR: std_logic; -- vhdl does not allow me to port map " s => (branch and alu_zero) "
+    signal shifted_jump_address: std_logic_vector(27 downto 0);
+    signal jump_address: std_logic_vector(25 downto 0);
+    signal immediate: std_logic_vector(15 downto 0);
+    signal opcode, funct: std_logic_vector(5 downto 0);
+    signal rs, rt, rd, write_reg, mux_registers: std_logic_vector(4 downto 0);
+    signal alu_ctrl: std_logic_vector(3 downto 0);
+    signal reg_dest, jump, branch, mem_read, mem_to_reg, mem_write, alu_src, reg_write, alu_zero, branch_and_alu_zero, JR: std_logic;
     signal alu_op: std_logic_vector(2 downto 0);
 
     begin
@@ -146,6 +146,7 @@ architecture Behavioral of MIPS_processor is
         immediate <= instruction(15 downto 0);
         jump_address <= instruction(25 downto 0);
         branch_and_alu_zero <= branch and alu_zero;
+        jump_and_pc <= next_pc (31 downto 28) & shifted_jump_address;
 
         PC: pc port map (next_address, instruction_address, reset, clk);
         InstructionMemory: instruction_memory port map (instruction_address, instruction);
@@ -161,7 +162,8 @@ architecture Behavioral of MIPS_processor is
         ALUControl: alu_control port map (funct, alu_op, alu_ctrl, JR);
         ALU: alu port map (read_data_1, mux_registers_out, alu_ctrl, alu_zero, alu_result);
         MuxAdd1: mux_32bits port map (branch_and_alu_zero, next_pc, add_pc_immediate, mux_add_1_res);
-        MuxAdd2: mux_32bits port map (jump, shifted_jump_address, mux_add_1_res, next_address);
+        MuxAdd2: mux_32bits port map (jump, jump_and_pc, mux_add_1_res, mux_add_2_res);
+        MuxAdd3: mux_32bits port map (JR, read_data_2, mux_add_2_res, next_address);
         DataMemory: data_memory port map (mem_read, mem_write, '0', clk, alu_result, read_data_2, mem_read_data);
         MuxDataMemory: mux_32bits port map (mem_to_reg, mem_read_data, alu_result, write_data);
 

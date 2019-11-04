@@ -11,19 +11,26 @@ entity control_unit is
 end control_unit;
 
 architecture Behavioral of control_unit is
-begin
-
---	signals			  				add								sub								and								or								slt								lw								sw								beq								j								addi							ori								jr
-	reg_dest 	<= '1' 	when opcode = "100000" else '1' when opcode = "100010" else '1' when opcode = "100100" else '1' when opcode = "100101" else '1' when opcode = "101010" else '0' when opcode = "100011" else '0' when opcode = "101011" else '0' when opcode = "000100" else '0' when opcode = "000010" else '0' when opcode = "001000" else '0' when opcode = "001101" else '0' when opcode = "001000" else '0';
-	jump		<=	'0' when opcode = "100000" else '0' when opcode = "100010" else '0' when opcode = "100100" else '0' when opcode = "100101" else '0' when opcode = "101010" else '0' when opcode = "100011" else '0' when opcode = "101011" else '0' when opcode = "000100" else '1' when opcode = "000010" else '0' when opcode = "001000" else '0' when opcode = "001101" else '1' when opcode = "001000" else '0';
-	branch 		<=	'0' when opcode = "100000"	else '0' when opcode = "100010" else '0' when opcode = "100100" else '0' when opcode = "100101" else '0' when opcode = "101010" else '0' when opcode = "100011" else '0' when opcode = "101011" else '1' when opcode = "000100" else '0' when opcode = "000010" else '0' when opcode = "001000" else '0' when opcode = "001101" else '0' when opcode = "001000" else '0';
-	mem_read 	<=	'0' when opcode = "100000"	else '0' when opcode = "100010" else '0' when opcode = "100100" else '0' when opcode = "100101" else '0' when opcode = "101010" else '1' when opcode = "100011" else '0' when opcode = "101011" else '0' when opcode = "000100" else '0' when opcode = "000010" else '0' when opcode = "001000" else '0' when opcode = "001101" else '1' when opcode = "001000" else '0';
-	mem_to_reg 	<=	'0' when opcode = "100000"	else '0' when opcode = "100010" else '0' when opcode = "100100" else '0' when opcode = "100101" else '0' when opcode = "101010" else '1' when opcode = "100011" else '0' when opcode = "101011" else '0' when opcode = "000100" else '0' when opcode = "000010" else '0' when opcode = "001000" else '0' when opcode = "001101" else '0' when opcode = "001000" else '0';
-	mem_write 	<=	'0' when opcode = "100000"	else '0' when opcode = "100010" else '0' when opcode = "100100" else '0' when opcode = "100101" else '0' when opcode = "101010" else '0' when opcode = "100011" else '1' when opcode = "101011" else '0' when opcode = "000100" else '0' when opcode = "000010" else '0' when opcode = "001000" else '0' when opcode = "001101" else '0' when opcode = "001000" else '0';
-	alu_src 		<=	'0' when opcode = "100000"	else '0' when opcode = "100010" else '0' when opcode = "100100" else '0' when opcode = "100101" else '0' when opcode = "101010" else '1' when opcode = "100011" else '1' when opcode = "101011" else '0' when opcode = "000100" else '0' when opcode = "000010" else '1' when opcode = "001000" else '1' when opcode = "001101" else '0' when opcode = "001000" else '0';
-	reg_write 	<=	'1' when opcode = "100000"	else '1' when opcode = "100010" else '1' when opcode = "100100" else '1' when opcode = "100101" else '1' when opcode = "101010" else '1' when opcode = "100011" else '0' when opcode = "101011" else '0' when opcode = "000100" else '0' when opcode = "000010" else '1' when opcode = "001000" else '1' when opcode = "001101" else '0' when opcode = "001000" else '0';
-	-- aqui abajo nomas hice copy paste, pero alu_op debe ser de 3 bits
-	alu_op 		<= '1' 	when opcode = "100000"	else '1' when opcode = "100010" else '1' when opcode = "100100" else '1' when opcode = "100101" else '1' when opcode = "101010" else '1' when opcode = "100011" else '0' when opcode = "101011" else '0' when opcode = "000100" else '0' when opcode = "000010" else '1' when opcode = "001000" else '1' when opcode = "001101" else '0' when opcode = "001000" else '0';
-
+	signal aux: std_logic_vector (10 downto 0) := (others => '0');
+	begin
+		with opCode select 
+			aux	<=	"10000001001" when "000000", -- R format, jr
+					"01000000000" when "000010", -- jump
+					"00100000010" when "000100", -- beq
+					"00000011000" when "001000", -- addi
+					"00000011011" when "001101", -- ori
+					"00000011100" when "001111", -- lui
+					"00011011000" when "100011", -- lw
+					"00000110000" when "101011", -- sw
+					"00000000000" when others ;
+			RegDst <= aux(10);
+			Jump <= aux(9);
+			Branch <= aux(8);
+			MemRead <= aux(7);
+			MemtoReg <= aux(6);
+			MemWrite <= aux(5);
+			ALUsrc <= aux(4);
+			RegWrite <= aux(3);
+			ALUop <= aux(2 downto 0);
 end Behavioral;
 

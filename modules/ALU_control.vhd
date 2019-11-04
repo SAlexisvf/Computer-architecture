@@ -12,22 +12,18 @@ entity alu_control is
 end alu_control;
 
 architecture Behavioral of alu_control is
-
-signal iOp: std_logic_vector(2 downto 0) := "000";
-signal rOp: std_logic_vector(2 downto 0) := "001";
-	
 begin
 
-alu_ctrl <= "010" when (alu_op = "000") else null;
-alu_ctrl <= "101" when (alu_op = "001" and funct = "000000") else null;
-alu_ctrl <= "010" when (alu_op = "001" and funct = "100000") else null;
-alu_ctrl <= "110" when (alu_op = "001" and funct = "100010") else null;
-alu_ctrl <= "000" when (alu_op = "001" and funct = "100100") else null;
-alu_ctrl <= "001" when (alu_op = "001" and funct = "100101") else null;
-alu_ctrl <= "111" when (alu_op = "001" and funct = "101010") else null;
-JR <= '1' when (alu_op = "001" and funct = "001000") else null;
-alu_ctrl <= "110" when (alu_op = "010") else null;
-alu_ctrl <= "001" when (alu_op = "011") else null;
-alu_ctrl <= "100" when (alu_op = "100") else null;
+	alu_ctrl <= "010" when (alu_op ="000") or (alu_op="001" and funct="100000")
+	else "101" when (alu_op ="001" and funct = "000000")
+	else "110" when (alu_op ="001" and funct ="100010") or (alu_op = "010")
+	else "000" when alu_op ="001" and funct ="100100"
+	else "001" when (alu_op="001" and funct="100101") or (alu_op ="011")
+	else "111" when alu_op="001" and funct ="101010"
+	else "000" when alu_op="001" and funct ="001000"
+	else "100" when alu_op ="100";
+	
+	JR <= '1' when (alu_op = "001" and funct="001000")
+	else '0';
 
 end Behavioral;
