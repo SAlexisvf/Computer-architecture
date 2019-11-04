@@ -1,33 +1,33 @@
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.numeric_std.ALL;
+library ieee;
+use ieee.std_logic_1164.ALL;
+use ieee.numeric_std.ALL;
 
-entity ALU_control is
+entity alu_control is
 	port (
 		funct: in std_logic_vector(5 downto 0);
-		ALUop: in std_logic_vector(2 downto 0);
-		ALUctrl: out std_logic_vector(2 downto 0);
+		alu_op: in std_logic_vector(2 downto 0);
+		alu_ctrl: out std_logic_vector(2 downto 0);
 		JR: out std_logic
 	);
-end ALU_control;
+end alu_control;
 
-architecture Behavioral of ALU_control is
+architecture Behavioral of alu_control is
 
 signal iOp: std_logic_vector(2 downto 0) := "000";
 signal rOp: std_logic_vector(2 downto 0) := "001";
 	
 begin
 
-ALUctrl <= "010" when (ALUop = "000") else null;
-ALUctrl <= "101" when (ALUop = "001" and funct = "000000") else null;
-ALUctrl <= "010" when (ALUop = "001" and funct = "100000") else null;
-ALUctrl <= "110" when (ALUop = "001" and funct = "100010") else null;
-ALUctrl <= "000" when (ALUop = "001" and funct = "100100") else null;
-ALUctrl <= "001" when (ALUop = "001" and funct = "100101") else null;
-ALUctrl <= "111" when (ALUop = "001" and funct = "101010") else null;
-JR <= '1' when (ALUop = "001" and funct = "001000") else null;
-ALUctrl <= "110" when (ALUop = "010") else null;
-ALUctrl <= "001" when (ALUop = "011") else null;
-ALUctrl <= "100" when (ALUop = "100") else null;
+alu_ctrl <= "010" when (alu_op = "000") else null;
+alu_ctrl <= "101" when (alu_op = "001" and funct = "000000") else null;
+alu_ctrl <= "010" when (alu_op = "001" and funct = "100000") else null;
+alu_ctrl <= "110" when (alu_op = "001" and funct = "100010") else null;
+alu_ctrl <= "000" when (alu_op = "001" and funct = "100100") else null;
+alu_ctrl <= "001" when (alu_op = "001" and funct = "100101") else null;
+alu_ctrl <= "111" when (alu_op = "001" and funct = "101010") else null;
+JR <= '1' when (alu_op = "001" and funct = "001000") else null;
+alu_ctrl <= "110" when (alu_op = "010") else null;
+alu_ctrl <= "001" when (alu_op = "011") else null;
+alu_ctrl <= "100" when (alu_op = "100") else null;
 
 end Behavioral;

@@ -42,27 +42,27 @@ ARCHITECTURE behavior OF register_file_testbench IS
     COMPONENT register_file
     port(
          clk : in  std_logic;
-         WriteReg : in  std_logic_vector(4 downto 0);
-         ReadReg1 : in  std_logic_vector(4 downto 0);
-         ReadReg2 : in  std_logic_vector(4 downto 0);
-         RegWrite : in  std_logic;
-         WriteData : in  std_logic_vector(31 downto 0);
-         ReadReg1output : out  std_logic_vector(31 downto 0);
-         ReadReg2output : out  std_logic_vector(31 downto 0)
+         write_reg : in  std_logic_vector(4 downto 0);
+         read_reg_1 : in  std_logic_vector(4 downto 0);
+         read_reg_2 : in  std_logic_vector(4 downto 0);
+         reg_write : in  std_logic;
+         write_data : in  std_logic_vector(31 downto 0);
+         read_data_1 : out  std_logic_vector(31 downto 0);
+         read_data_2 : out  std_logic_vector(31 downto 0)
         );
     end COMPONENT;
 
    --inputs
    signal clk : std_logic := '0';
-   signal WriteReg : std_logic_vector(4 downto 0) := (others => '0');
-   signal ReadReg1 : std_logic_vector(4 downto 0) := (others => '0');
-   signal ReadReg2 : std_logic_vector(4 downto 0) := (others => '0');
-   signal RegWrite : std_logic := '0';
-   signal WriteData : std_logic_vector(31 downto 0) := (others => '0');
+   signal write_reg : std_logic_vector(4 downto 0) := (others => '0');
+   signal read_reg_1 : std_logic_vector(4 downto 0) := (others => '0');
+   signal read_reg_2 : std_logic_vector(4 downto 0) := (others => '0');
+   signal reg_write : std_logic := '0';
+   signal write_data : std_logic_vector(31 downto 0) := (others => '0');
 
  	--outputs
-   signal ReadReg1output : std_logic_vector(31 downto 0);
-   signal ReadReg2output : std_logic_vector(31 downto 0);
+   signal read_data_1 : std_logic_vector(31 downto 0);
+   signal read_data_2 : std_logic_vector(31 downto 0);
 
    -- Clock period definitions
    constant clk_period : time := 10 ns;
@@ -72,13 +72,13 @@ begin
 	-- instantiate the Unit Under Test (UUT)
    uut: register_file port map (
           clk => clk,
-          WriteReg => WriteReg,
-          ReadReg1 => ReadReg1,
-          ReadReg2 => ReadReg2,
-          RegWrite => RegWrite,
-          WriteData => WriteData,
-          ReadReg1output => ReadReg1output,
-          ReadReg2output => ReadReg2output
+          write_reg => write_reg,
+          read_reg_1 => read_reg_1,
+          read_reg_2 => read_reg_2,
+          reg_write => reg_write,
+          write_data => write_data,
+          read_data_1 => read_data_1,
+          read_data_2 => read_data_2
         );
 
    -- Clock process definitions
@@ -101,24 +101,24 @@ begin
 
       -- insert stimulus here 
 		
-		ReadReg1 <= "00001";
-		ReadReg2 <= "00011";
+		read_reg_1 <= "00001";
+		read_reg_2 <= "00011";
 		
 		wait for 25 ns;
 		
-		WriteReg <= "00001";
-		WriteData <= x"0000_1111";
-		RegWrite <= '1';
+		write_reg <= "00001";
+		write_data <= x"0000_1111";
+		reg_write <= '1';
 		
 		wait for 25 ns;
 		
-		RegWrite <= '0';
+		reg_write <= '0';
 		
 		wait for 10 ns;
 		
-		WriteReg <= "00011";
-		WriteData <= x"1111_0000";
-		RegWrite <= '1';
+		write_reg <= "00011";
+		write_data <= x"1111_0000";
+		reg_write <= '1';
 
       wait;
    end process;

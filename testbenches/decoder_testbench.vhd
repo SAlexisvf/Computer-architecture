@@ -41,16 +41,16 @@ ARCHITECTURE behavior OF decoder_testbench IS
  
     COMPONENT decoder
     port(
-         WriteReg : in  std_logic_vector(4 downto 0);
-         RegWrite : in  std_logic;
+         write_reg : in  std_logic_vector(4 downto 0);
+         reg_write : in  std_logic;
          Enabler : out  std_logic_vector(31 downto 0)
         );
     end COMPONENT;
     
 
    --inputs
-   signal WriteReg : std_logic_vector(4 downto 0) := (others => '0');
-   signal RegWrite : std_logic := '0';
+   signal write_reg : std_logic_vector(4 downto 0) := (others => '0');
+   signal reg_write : std_logic := '0';
 
  	--outputs
    signal Enabler : std_logic_vector(31 downto 0);
@@ -61,8 +61,8 @@ begin
  
 	-- instantiate the Unit Under Test (UUT)
    uut: decoder port map (
-          WriteReg => WriteReg,
-          RegWrite => RegWrite,
+          write_reg => write_reg,
+          reg_write => reg_write,
           Enabler => Enabler
         );
  
@@ -74,21 +74,21 @@ begin
       wait for 100 ns;	
 
       -- insert stimulus here 
-		RegWrite <= '1';
-		WriteReg <= "00010";
+		reg_write <= '1';
+		write_reg <= "00010";
 		
 		wait for 25 ns;
 		
-		WriteReg <= "00011";
+		write_reg <= "00011";
 		
 		wait for 25 ns;
 		
-		RegWrite <= '0';
+		reg_write <= '0';
 		
 		wait for 25 ns;
 		
-		WriteReg <= "01011";
-		RegWrite <= '1';
+		write_reg <= "01011";
+		reg_write <= '1';
 		
 
       wait;

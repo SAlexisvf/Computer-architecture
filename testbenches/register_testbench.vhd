@@ -43,7 +43,7 @@ ARCHITECTURE behavior OF registers_testbench IS
     COMPONENT reg
     port(
          clk : in  std_logic;
-         WriteData : in  std_logic_vector(31 downto 0);
+         write_data : in  std_logic_vector(31 downto 0);
          Enabler : in  std_logic_vector(31 downto 0);
          Registers : out  SLV_ARRAY
         );
@@ -52,7 +52,7 @@ ARCHITECTURE behavior OF registers_testbench IS
 
    --inputs
    signal clk : std_logic := '0';
-   signal WriteData : std_logic_vector(31 downto 0) := (others => '0');
+   signal write_data : std_logic_vector(31 downto 0) := (others => '0');
    signal Enabler : std_logic_vector(31 downto 0) := (others => '0');
 
  	--outputs
@@ -66,7 +66,7 @@ begin
 	-- instantiate the Unit Under Test (UUT)
    uut: reg port map (
           clk => clk,
-          WriteData => WriteData,
+          write_data => write_data,
           Enabler => Enabler,
           Registers => Registers
         );
@@ -91,13 +91,13 @@ begin
 
       -- insert stimulus here 
 		Enabler(1) <= '1';
-		WriteData <= x"0000_1111";
+		write_data <= x"0000_1111";
 		
 		wait for 25 ns;
 		
 		Enabler(1) <= '0';
 		Enabler(2) <= '1';
-		WriteData <= x"1111_1111";
+		write_data <= x"1111_1111";
 		
 
       wait;
