@@ -1,25 +1,18 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-entity mux32 is 
+entity mux_32bits is 
 	port (
 		selector: in std_logic; -- selector line
 		input_1: in std_logic_vector (31 downto 0); -- input 1
 		input_2: in std_logic_vector (31 downto 0); -- input 2
 		output: out std_logic_vector (31 downto 0) 	-- output
 	);
-end mux32;
+end mux_32bits;
 
-architecture mux32_impl of mux32 is
+architecture Behavioral of mux_32bits is
 begin 
-	process(selector, input_1, input_2)
-	begin
-	if selector = '0' THEN
-		output <= input_1;
-	else
-		output <= input_2;
-	end if;
-	end process;
-end mux32_impl;
+	output <= input_1 when (selector = '0') else input_2;
+end Behavioral;
 
 

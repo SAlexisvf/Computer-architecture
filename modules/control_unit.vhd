@@ -23,14 +23,14 @@ architecture Behavioral of control_unit is
 					"00011011000" when "100011", -- lw
 					"00000110000" when "101011", -- sw
 					"00000000000" when others ;
-			RegDst <= aux(10);
-			Jump <= aux(9);
+			reg_dest <= aux(10);
+			jump <= aux(9);
 			Branch <= aux(8);
-			MemRead <= aux(7);
-			MemtoReg <= aux(6);
-			MemWrite <= aux(5);
-			ALUsrc <= aux(4);
-			RegWrite <= aux(3);
-			ALUop <= aux(2 downto 0);
+			mem_read <= aux(7);
+			mem_to_reg <= aux(6);
+			mem_write <= aux(5);
+			alu_src <= aux(4);
+			reg_write <= aux(3);
+			alu_op <= aux(2 downto 0);
 end Behavioral;
 

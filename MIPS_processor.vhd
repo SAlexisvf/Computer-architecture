@@ -19,7 +19,7 @@ architecture Behavioral of MIPS_processor is
         );
     end component;
 
-    component adder
+    component adder is
         port (
             a : in std_logic_vector(31 downto 0);
             b : in std_logic_vector(31 downto 0);
@@ -27,17 +27,17 @@ architecture Behavioral of MIPS_processor is
         );
     end component;
 
-    component alu
+    component alu is
         port (
             a : in std_logic_vector(31 downto 0);
             b : in std_logic_vector(31 downto 0);
             cntrl : in std_logic_vector(2 downto 0);
             zero : out std_logic;
-            result : buffer std_logic_vector(31 downto 0)
+            result : out std_logic_vector(31 downto 0)
         );
     end component;
 
-    component data_memory
+    component data_memory is
         port (
             read_enable: in std_logic;
             write_enable: in std_logic;
@@ -49,14 +49,14 @@ architecture Behavioral of MIPS_processor is
         );
     end component;
 
-    component instruction_memory
+    component instruction_memory is
         port (
             direccion : in std_logic_vector(31 downto 0);
             dato : out std_logic_vector(31 downto 0)
         );
     end component;
 
-    component mux_5bits
+    component mux_5bits is
         port (
             selector: in std_logic; -- selector line
             input_1: in std_logic_vector (4 downto 0); -- input 1
@@ -65,7 +65,7 @@ architecture Behavioral of MIPS_processor is
         );
     end component;
 
-    component mux_32bits
+    component mux_32bits is
         port (
             selector: in std_logic; -- selector line
             input_1: in std_logic_vector (31 downto 0); -- input 1
@@ -126,13 +126,13 @@ architecture Behavioral of MIPS_processor is
     signal next_address: std_logic_vector(31 downto 0);
     signal instruction: std_logic_vector(31 downto 0);
     signal read_data_1, read_data_2, write_data, next_pc, extended_immediate, shifted_immediate, add_pc_immediate: std_logic_vector(31 downto 0);
-    signal mux_registers_out, alu_result, mux_add_1_res, mux_add_2_res, mem_read_data: std_logic_vector(31 downto 0);
+    signal mux_registers_out, alu_result, mux_add_1_res, mux_add_2_res, mem_read_data, jump_and_pc: std_logic_vector(31 downto 0);
     signal shifted_jump_address: std_logic_vector(27 downto 0);
     signal jump_address: std_logic_vector(25 downto 0);
     signal immediate: std_logic_vector(15 downto 0);
     signal opcode, funct: std_logic_vector(5 downto 0);
     signal rs, rt, rd, write_reg, mux_registers: std_logic_vector(4 downto 0);
-    signal alu_ctrl: std_logic_vector(3 downto 0);
+    signal alu_ctrl: std_logic_vector(2 downto 0);
     signal reg_dest, jump, branch, mem_read, mem_to_reg, mem_write, alu_src, reg_write, alu_zero, branch_and_alu_zero, JR: std_logic;
     signal alu_op: std_logic_vector(2 downto 0);
 
@@ -148,7 +148,7 @@ architecture Behavioral of MIPS_processor is
         branch_and_alu_zero <= branch and alu_zero;
         jump_and_pc <= next_pc (31 downto 28) & shifted_jump_address;
 
-        PC: pc port map (next_address, instruction_address, reset, clk);
+        ProgramCounter: pc port map (next_address, instruction_address, reset, clk);
         InstructionMemory: instruction_memory port map (instruction_address, instruction);
         AddPC4: adder port map (instruction_address, "00000000000000000000000000000100", next_pc);
         Shift28: shift_left_28bits port map (jump_address, shifted_jump_address);
@@ -160,7 +160,7 @@ architecture Behavioral of MIPS_processor is
         AddImmediatePC: adder port map (next_pc, shifted_immediate, add_pc_immediate);
         MuxRegistersOut: mux_32bits port map (alu_src, read_data_2, extended_immediate, mux_registers_out);
         ALUControl: alu_control port map (funct, alu_op, alu_ctrl, JR);
-        ALU: alu port map (read_data_1, mux_registers_out, alu_ctrl, alu_zero, alu_result);
+        ALUModule: alu port map (read_data_1, mux_registers_out, alu_ctrl, alu_zero, alu_result);
         MuxAdd1: mux_32bits port map (branch_and_alu_zero, next_pc, add_pc_immediate, mux_add_1_res);
         MuxAdd2: mux_32bits port map (jump, jump_and_pc, mux_add_1_res, mux_add_2_res);
         MuxAdd3: mux_32bits port map (JR, read_data_2, mux_add_2_res, next_address);

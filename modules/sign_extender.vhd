@@ -9,15 +9,7 @@ entity sign_extender is
 end sign_extender;
 
 architecture Behavioral of sign_extender is
-
 begin
-	process (num)
-	begin
-		if num(15) = '1' then
-			signed_num <= x"FFFF" & num;
-		else
-			signed_num <= x"0000" & num;
-		end if;
-	end process;
+	signed_num <= B"0000000000000000" & num when num(15) = '0' else B"1111111111111111" & num;
 end Behavioral;
 
