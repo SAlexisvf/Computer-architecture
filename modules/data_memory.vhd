@@ -20,7 +20,7 @@ architecture Behavioral of data_memory is
 
 begin
 
-process(CLK)
+process(CLK, read_enable, address)
 
 SUBTYPE REGISTRO IS std_logic_vector(31 downto 0);
 TYPE REG_BANK IS ARRAY(0 TO 31) OF REGISTRO; 
@@ -34,16 +34,16 @@ OTHERS => (OTHERS => '0')
 );
 
 begin
-if CLK'event AND CLK = '0' THEN
-	if enable = '0' then
-		if read_enable = '1' THEN
-			read_data <= RAM_MEMORY(TO_inTEGER(unsigned(address(6 downto 2))));
-		elsif write_enable = '1' then 
+	if (falling_edge(clk)) THEN
+		if write_enable = '1' then 
 			RAM_MEMORY(TO_inTEGER(unsigned(address(6 downto 2)))) := write_data;
 			read_data <= (OTHERS => '0');
 		end if;
 	end if;
-end if;
+
+	if read_enable = '1' THEN
+		read_data <= RAM_MEMORY(TO_inTEGER(unsigned(address(6 downto 2))));
+	end if;
 end process;
 end Behavioral;
 

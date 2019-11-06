@@ -14,9 +14,10 @@ end reg;
 
 architecture Behavioral of reg is
 begin
-process(clk)
+process(clk, Enabler, write_data)
 begin
-	if (rising_edge(clk)) then
+	Registers(0) <= x"0000_0000";
+	if clk'event and clk = '0' then
 		for i in 1 to 31 loop
 			if Enabler(i) = '1' then
 				Registers(i) <= write_data;

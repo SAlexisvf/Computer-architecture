@@ -16,23 +16,36 @@ entity alu is
 end alu;
 
 architecture Behavioral of alu is
-signal result_temp: std_logic_vector(31 downto 0);
-
+signal aux_result: std_logic_vector(31 DOWNTO 0);
 begin
-
-	result_temp <= a and b when cntrl="000"
-						else a or b when cntrl = "001"
-						else a + b when cntrl = "010"
-						else a when cntrl = "011"
-						else b(15 downto 0)& x"0000" when cntrl = "100"
-						else a - b when cntrl = "110"
-						else x"00000001" when a < b and cntrl = "111"
-						else x"00000000" when a >= b and cntrl = "111";
-						
-	zero <= '1' when result_temp = x"00000000"
-	else '0';
+process(a, b, Ctrl)
+begin 
+	case Ctrl is
+		when "000" => aux_result<= (a AND b); --And operation
+		when "001" => aux_result<= (a OR b);  --Or operation
+		when "010" => aux_result<= (a + b);	 --Add operator
+		when "011" => aux_result<= (a);		 --equal
+		when "100" => aux_result<= (b(15 downto 0)&"0000000000000000"); --Concatenate Operation
+		when "101" => null;						--null
+		when "110" => aux_result<= (a - b);	--subtraction operation
+		when "111" => 
+			if a < b then	--If (a<b), then equal to 1
+				aux_result<= ("00000000000000000000000000000001");
+			else				--else, equal to 0
+				aux_result<= ("00000000000000000000000000000000");
+			end if;
+		when others => null;
+	end case;
+end process;
 	
-	result<=result_temp;
-
+process(aux_result)
+begin
+	if (aux_result="00000000000000000000000000000000") then
+		zero <= '1';
+	else
+		zero <= '0';
+	end if;
+	result <= aux_result;
+end process;
 end Behavioral;
 
