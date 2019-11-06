@@ -1,6 +1,7 @@
 _xmsgs/
 iseconfig/
 isim/
+xst/
 *.html
 *.prj
 *.exe
@@ -12,3 +13,13 @@ isim/
 *.xise
 *.ini
 *.DS_Store
+*.lso
+*.xrpt
+*.cmd_log
+*.ngc
+*.ngr
+*.stx
+*.syr
+*.xst
+*.xml
+reg_type.vhd
