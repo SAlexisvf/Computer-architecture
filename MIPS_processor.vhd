@@ -162,10 +162,10 @@ architecture Behavioral of MIPS_processor is
         ALUControl: alu_control port map (funct, alu_op, alu_ctrl, JR);
         ALUModule: alu port map (read_data_1, mux_registers_out, alu_ctrl, alu_zero, alu_result);
         MuxAdd1: mux_32bits port map (branch_and_alu_zero, next_pc, add_pc_immediate, mux_add_1_res);
-        MuxAdd2: mux_32bits port map (jump, jump_and_pc, mux_add_1_res, mux_add_2_res);
-        MuxAdd3: mux_32bits port map (JR, read_data_2, mux_add_2_res, next_address);
+        MuxAdd2: mux_32bits port map (jump, mux_add_1_res, jump_and_pc, mux_add_2_res);
+        MuxAdd3: mux_32bits port map (JR, mux_add_2_res, read_data_2, next_address);
         DataMemory: data_memory port map (mem_read, mem_write, '0', clk, alu_result, read_data_2, mem_read_data);
-        MuxDataMemory: mux_32bits port map (mem_to_reg, mem_read_data, alu_result, write_data);
+        MuxDataMemory: mux_32bits port map (mem_to_reg, alu_result, mem_read_data, write_data);
 
     end Behavioral;
 

@@ -2,6 +2,8 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
+use ieee.std_logic_arith.all;
+use ieee.std_logic_unsigned.all;
 
 entity alu is
 	port (
@@ -20,10 +22,10 @@ begin
 
 	result_temp <= a and b when cntrl="000"
 						else a or b when cntrl = "001"
-						else std_logic_vector(unsigned(a) + unsigned(b)) when cntrl = "010"
+						else a + b when cntrl = "010"
 						else a when cntrl = "011"
 						else b(15 downto 0)& x"0000" when cntrl = "100"
-						else std_logic_vector(unsigned(a) - unsigned(b)) when cntrl = "110"
+						else a - b when cntrl = "110"
 						else x"00000001" when a < b and cntrl = "111"
 						else x"00000000" when a >= b and cntrl = "111";
 						

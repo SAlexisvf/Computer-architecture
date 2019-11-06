@@ -16,9 +16,9 @@ architecture Behavioral of reg is
 begin
 process(clk)
 begin
-	if clk'event and clk = '0' then
-		for i in 0 to 31 loop
-			if Enabler(i) = '1' and i /= 0 then
+	if (rising_edge(clk)) then
+		for i in 1 to 31 loop
+			if Enabler(i) = '1' then
 				Registers(i) <= write_data;
 			end if;
 		end loop;

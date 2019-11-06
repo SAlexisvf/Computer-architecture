@@ -49,7 +49,7 @@ ARCHITECTURE behavior OF MIPS_processor_testbench IS
 
    --Inputs
    signal clk : std_logic := '0';
-   signal reset : std_logic := '0';
+   signal reset : std_logic := '1';
 
    -- Clock period definitions
    constant clk_period : time := 15 ns;
@@ -77,6 +77,8 @@ BEGIN
    begin		
       -- hold reset state for 100 ns.
       wait for 100 ns;	
+		
+		reset <= '0';
 
       wait for clk_period*10;
 
