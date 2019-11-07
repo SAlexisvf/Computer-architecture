@@ -10,6 +10,7 @@ end MIPS_processor;
 
 architecture Behavioral of MIPS_processor is
     
+    -- MIPS blocks components
     component pc is
         port (
             d : in std_logic_vector (31 downto 0);
@@ -122,6 +123,7 @@ architecture Behavioral of MIPS_processor is
         );
     end component;
 
+    -- signals 
     signal instruction_address: std_logic_vector(31 downto 0);
     signal next_address: std_logic_vector(31 downto 0);
     signal instruction: std_logic_vector(31 downto 0);
@@ -138,6 +140,7 @@ architecture Behavioral of MIPS_processor is
 
     begin
 
+        -- MIPS instruction format
         opcode <= instruction(31 downto 26);
         rs <= instruction(25 downto 21);
         rt <= instruction(20 downto 16);
@@ -145,9 +148,11 @@ architecture Behavioral of MIPS_processor is
         funct <= instruction(5 downto 0);
         immediate <= instruction(15 downto 0);
         jump_address <= instruction(25 downto 0);
+
         branch_and_alu_zero <= branch and alu_zero;
         jump_and_pc <= next_pc (31 downto 28) & shifted_jump_address;
 
+        -- wire each block according to the MIPS processor block diagram
         ProgramCounter: pc port map (next_address, instruction_address, reset, clk);
         InstructionMemory: instruction_memory port map (instruction_address, instruction);
         AddPC4: adder port map (instruction_address, "00000000000000000000000000000100", next_pc);
