@@ -63,10 +63,10 @@ others => (others => '0')
 
 ### MIPS processor testbench
 
-![MIPS testbench](images/MIPS_testbench.png)
+![MIPS testbench](images/MIPS_testbench.PNG)
 
 Paying close attention to the PC (q[31:0]) and the internal registers, based on the previous instructions and memory values preloaded, its clear how each instruction is being executed and how the registers are being modified based on the instruction
 
 After the instructions have finished executing, the expected values for the registers are as follows:
 
-![Registers](images/Registers.png)
+![Registers](images/Registers.PNG)
