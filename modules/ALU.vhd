@@ -18,9 +18,9 @@ end alu;
 architecture Behavioral of alu is
 signal aux_result: std_logic_vector(31 DOWNTO 0);
 begin
-process(a, b, Ctrl)
+process(a, b, cntrl)
 begin 
-	case Ctrl is
+	case cntrl is
 		when "000" => aux_result<= (a AND b); --And operation
 		when "001" => aux_result<= (a OR b);  --Or operation
 		when "010" => aux_result<= (a + b);	 --Add operator
