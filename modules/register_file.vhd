@@ -34,10 +34,10 @@ component reg is
 end component;
 
 signal DECODER_ENABLERS : std_logic_vector(31 downto 0);
-signal inTERNAL_REGISTERS : SLV_ARRAY;
+signal internal_registers : SLV_ARRAY;
 begin
-	REG_FILE_DECODER : decoder port map (write_reg, reg_write, DECODER_ENABLERS);
-	REG_FILE_REGISTERS : reg port map (clk, write_data, DECODER_ENABLERS, inTERNAL_REGISTERS);
-	REG_FILE_MUX_1 : mux_register_file port map (read_reg_1, inTERNAL_REGISTERS, read_data_1);
-	REG_FILE_MUX_2 : mux_register_file port map (read_reg_2, inTERNAL_REGISTERS, read_data_2);
+	reg_file_decoder : decoder port map (write_reg, reg_write, DECODER_ENABLERS);
+	reg_file_registers : reg port map (clk, write_data, DECODER_ENABLERS, internal_registers);
+	reg_file_mux_1 : mux_register_file port map (read_reg_1, internal_registers, read_data_1);
+	reg_file_mux_2 : mux_register_file port map (read_reg_2, internal_registers, read_data_2);
 end Behavioral;

@@ -20,18 +20,18 @@ architecture Behavioral of data_memory is
 
 begin
 
-process(CLK, read_enable, address)
+process(clk, read_enable, address)
 
 SUBTYPE REGISTRO IS std_logic_vector(31 downto 0);
 TYPE REG_BANK IS ARRAY(0 TO 31) OF REGISTRO; 
 
 -- preloaded data memory values, this is needed to test the code from the instruction memory
-VARIABLE RAM_MEMORY : REG_BANK := ( 
+variable RAM_MEMORY : REG_BANK := ( 
 	x"0000_0003",
 	x"0000_0004",
 	x"0000_0005",
 	x"0000_0006",
-OTHERS => (OTHERS => '0') 
+others => (others => '0') 
 );
 
 begin
